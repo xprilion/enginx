@@ -3,6 +3,7 @@
 ---------------------------
 
 Language requirements:
+
     - JavaScript (advanced)
     - Python (advanced)
     - HTML (medium)
@@ -10,4 +11,5 @@ Language requirements:
     - PHP (very basic)
     
 Interface:
+    
     - JSON REST API
