@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<title>enginx - live monitor</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: "Raleway", sans-serif
+}
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+
+
+function run_state() {
+    $.ajax({
+        url: 'storage/run_state.json',
+        type: 'GET',
+        dataType: "json",
+        success: function(res) {
+            // console.log(res);
+            if(res.state + 2 - 1 - 1 == 1){
+                $("#run-state").empty().append("Running");
+            }
+            else{
+                $("#run-state").empty().append("Stopped");
+            }
+        }
+    });
+}
+
+function avg_wait_time() {
+    $.ajax({
+        url: 'storage/avg_wait_time.json',
+        type: 'GET',
+        dataType: "json",
+        success: function(res) {
+            // console.log(res);
+            $("#avg_wait_time").empty().append(res.value);
+        }
+    });
+}
+
+function running_cars() {
+    $.ajax({
+        url: 'storage/running_cars.json',
+        type: 'GET',
+        dataType: "json",
+        success: function(res) {
+            // console.log(res);
+            $("#running_cars").empty().append(res.value);
+        }
+    });
+}
+
+function now_time() {
+    $.ajax({
+        url: 'storage/now_time.json',
+        type: 'GET',
+        dataType: "json",
+        success: function(res) {
+            // console.log(res);
+            $("#now_time").empty().append(res.value);
+        }
+    });
+}
+
+$(document).ready(function() {
+    setInterval(run_state, 1000);
+    setInterval(avg_wait_time, 500);
+    setInterval(running_cars, 500);
+    setInterval(now_time, 500);
+});
+</script>
+
+<body class="w3-light-grey">
+    <!-- Top container -->
+    <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+        <span class="w3-bar-item" id="run-state"></span>
+        <span class="w3-bar-item w3-right">domini uim</span>
+    </div>
+    <!-- Sidebar/menu -->
+    <!-- Overlay effect when opening sidebar on small screens -->
+    <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-main" style="margin-left:30px;margin-right:30px;margin-top:43px;">
+        <!-- Header -->
+        <header class="w3-container" style="padding-top:22px">
+            <h5><b><i class="fa fa-dashboard"></i> Monitor</b></h5>
+        </header>
+        <div class="w3-row-padding w3-margin-bottom">
+            <div class="w3-quarter">
+                <div class="w3-container w3-red w3-padding-16">
+                    <div class="w3-center">
+                        <h1 id="running_cars">0</h1>
+                    </div>
+                    <div class="w3-center">
+                        <h4>running cars</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="w3-quarter">
+                <div class="w3-container w3-blue w3-padding-16">
+                    <div class="w3-center">
+                        <h1 id="avg_wait_time">0.0</h1>
+                    </div>
+                    <div class="w3-center">
+                        <h4>avg wait time</h4>
+                    </div>
+                </div>
+            </div>
+       <!--      <div class="w3-quarter">
+                <div class="w3-container w3-teal w3-padding-16">
+                    <div class="w3-center">
+                        <h1>52</h1>
+                    </div>
+                    <div class="w3-center">
+                        <h4>cars</h4>
+                    </div>
+                </div>
+            </div> -->
+            <div class="w3-quarter">
+                <div class="w3-container w3-orange w3-text-white w3-padding-16">
+                    <div class="w3-center">
+                        <h1 id="now_time">0</h1>
+                    </div>
+                    <div class="w3-center">
+                        <h4>time</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!--         <div class="w3-container">
+            <p>New Visitors</p>
+            <div class="w3-grey">
+                <div class="w3-container w3-center w3-padding w3-green" style="width:25%">+25%</div>
+            </div>
+            <p>New Users</p>
+            <div class="w3-grey">
+                <div class="w3-container w3-center w3-padding w3-orange" style="width:50%">50%</div>
+            </div>
+            <p>Bounce Rate</p>
+            <div class="w3-grey">
+                <div class="w3-container w3-center w3-padding w3-red" style="width:75%">75%</div>
+            </div>
+        </div> -->
+    </div>
+</body>
+
+</html>
