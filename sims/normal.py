@@ -32,6 +32,9 @@ def run():
 
     while traci.simulation.getMinExpectedNumber() > 0:
 
+        if step % 3 == 0:
+            traci.gui.screenshot("View #0", "/var/www/html/enginx/sim3/storage/view.jpg")
+
         ### total_wait_time
         total_wait_time = 0
         loaded_cars = traci.simulation.getDepartedNumber()
@@ -69,6 +72,8 @@ def run():
 
         traci.simulationStep()
         step += 1
+
+    traci.gui.screenshot("View #0", "/var/www/html/enginx/sim3/storage/view.jpg")
 
     data = {"state": 0}
     with open('/var/www/html/enginx/sim3/storage/run_state.json', 'w') as outfile:
@@ -145,7 +150,7 @@ if __name__ == "__main__":
         edges[edg.getID()] = desc
 
     traci.start([sumoBinary, "-c", "data/normal/cross.sumocfg",
-                             "--tripinfo-output", "normal-trip.xml", "--additional-files", "data/normal/add.xml"])
+                             "--tripinfo-output", "normal-trip.xml", "--additional-files", "data/normal/add.xml", "--start", "true"])
 
     for i in range(100):
         sei = random.randint(0, len(edgenames)-1)
