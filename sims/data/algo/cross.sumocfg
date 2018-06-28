@@ -2,6 +2,8 @@
 
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
 
+    <gui-settings-file value="../../viewsettings.xml"/>
+
     <input>
         <net-file value="cross.net.xml"/>
     </input>

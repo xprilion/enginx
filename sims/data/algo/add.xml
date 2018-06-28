@@ -2,10 +2,4 @@
     <vType id="reroutingType">
         <param key="has.rerouting.device" value="true" guiShape="passenger" />
     </vType>
-    <vType id="reroutingType2">
-        <param key="has.rerouting.device" value="true" guiShape="passenger" />
-    </vType>
-    <vType id="reroutingType3">
-        <param key="has.rerouting.device" value="true" guiShape="bus" />
-    </vType>
 </additional>
