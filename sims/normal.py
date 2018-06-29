@@ -41,8 +41,8 @@ if __name__ == "__main__":
     if options.nogui:
         sumoBinary = checkBinary('sumo')
     else:
-        # sumoBinary = checkBinary('sumo-gui')
-        sumoBinary = checkBinary('sumo')
+        sumoBinary = checkBinary('sumo-gui')
+        # sumoBinary = checkBinary('sumo')
 
     juncs = {}
 
@@ -80,7 +80,7 @@ if __name__ == "__main__":
 
         edges[edg.getID()] = desc
 
-    traci.start([sumoBinary, "-c", "data/normal/cross.sumocfg", "--tripinfo-output", "normal-trip.xml", "--additional-files", "data/normal/add.xml", "--start", "true"])
+    traci.start([sumoBinary, "-c", "data/normal/cross.sumocfg", "--tripinfo-output", "normal-trip.xml", "--additional-files", "data/normal/add.xml", "--start", "true", "--verbose", "true"])
 
     for i in range(100):
         sei = random.randint(0, len(edgenames)-1)
@@ -107,9 +107,9 @@ if __name__ == "__main__":
         traci.route.add("trip"+str(i), cartrip)
         traci.vehicle.add("v"+str(i), "trip"+str(i), typeID="reroutingType",  depart= i+random.randint(0, 5*(i+1)))
 
-    # data = {"state": 1}
-    # with open('/var/www/html/enginx/sim3/storage/run_state.json', 'w') as outfile:
-    #     json.dump(data, outfile)
+    data = {"state": 1}
+    with open('/var/www/html/enginx/sim3/storage/run_state.json', 'w') as outfile:
+        json.dump(data, outfile)
 
     startTime = int(time.time())
 
@@ -120,47 +120,86 @@ if __name__ == "__main__":
     # wb.open_new_tab('http://localhost/enginx/sim3/monitor.html')
 
     total_wait_time = 0
-    running_cars = 0
+    running_cars = []
 
     while traci.simulation.getMinExpectedNumber() > 0:
 
-        # if step % 3 == 0:
-        #     traci.gui.screenshot("View #0", "/var/www/html/enginx/sim3/storage/view.jpg")
+        if step % 3 == 0:
+            traci.gui.screenshot("View #0", "/var/www/html/enginx/sim3/storage/view.jpg")
 
-        ### total_wait_time
-        total_wait_time = 0
-        loaded_cars = traci.simulation.getDepartedNumber()
-        unloaded_cars = traci.simulation.getArrivedNumber()
 
-        running_cars += loaded_cars
-        running_cars -= unloaded_cars
+        junction_pressure = {}
 
-        for i in range(100):
+        total_j_pressure = 0
+
+        for jnc in juncs.keys():
+            desc = 0
+
+            links = traci.trafficlight.getControlledLinks(jnc)
+            ins = []
+            for l in links:
+                if l[0][0] not in ins:
+                    ins.append(l[0][0][:-2])
+
+            # print(ins, juncs[jnc]["in"])
+
+
             try:
-                total_wait_time += traci.vehicle.getAccumulatedWaitingTime("v"+str(i))
+                pressures = [(traci.edge.getLastStepOccupancy(x) / 10) + ((traci.edge.getLastStepVehicleNumber(x) - traci.edge.getLastStepHaltingNumber(x))/traci.edge.getLastStepMeanSpeed(x)) + traci.edge.getLastStepHaltingNumber(x) * 2  for x in ins]
+            except:
+                pressures = [(traci.edge.getLastStepOccupancy(x) / 10) + (traci.edge.getLastStepVehicleNumber(x) - traci.edge.getLastStepHaltingNumber(x)) + traci.edge.getLastStepHaltingNumber(x) * 2  for x in ins]
+
+
+            desc = sum(pressures) * 100 / len(pressures)
+
+            total_j_pressure += desc
+
+            pjuns = {}
+
+            for i in range(len(ins)):
+                pjuns[ins[i]] = pressures[i]
+
+            junction_pressure[jnc] = [desc, pjuns]
+
+        avg_jnc_pressure = total_j_pressure / len(juncs.keys())
+
+        total_wait_time = 0
+        loaded_cars = traci.simulation.getDepartedIDList()
+        unloaded_cars = traci.simulation.getArrivedIDList()
+
+        running_cars.extend(loaded_cars)
+        running_cars = [x for x in running_cars if x not in unloaded_cars]
+
+
+        for rcid in running_cars:
+            try:
+                total_wait_time += traci.vehicle.getAccumulatedWaitingTime(rcid)
             except:
                 pass
-
         # print(total_wait_time)
 
         try:
-            avg_wait_time = float(total_wait_time) / float(running_cars)
+            avg_wait_time = float(total_wait_time) / float(len(running_cars))
         except:
             avg_wait_time = 0
 
         now_time = traci.simulation.getCurrentTime() / 1000
 
-        # data = {"value": round(avg_wait_time, 2)}
-        # with open('/var/www/html/enginx/sim3/storage/avg_wait_time.json', 'w') as outfile:
-        #     json.dump(data, outfile)
+        data = {"value": round(avg_wait_time, 2)}
+        with open('/var/www/html/enginx/sim3/storage/avg_wait_time.json', 'w') as outfile:
+            json.dump(data, outfile)
 
-        # data = {"value": running_cars}
-        # with open('/var/www/html/enginx/sim3/storage/running_cars.json', 'w') as outfile:
-        #     json.dump(data, outfile)
+        data = {"value": len(running_cars)}
+        with open('/var/www/html/enginx/sim3/storage/running_cars.json', 'w') as outfile:
+            json.dump(data, outfile)
 
-        # data = {"value": now_time}
-        # with open('/var/www/html/enginx/sim3/storage/now_time.json', 'w') as outfile:
-        #     json.dump(data, outfile)
+        data = {"value": now_time}
+        with open('/var/www/html/enginx/sim3/storage/now_time.json', 'w') as outfile:
+            json.dump(data, outfile)
+
+        data = {"value": round(avg_jnc_pressure, 3)}
+        with open('/var/www/html/enginx/sim3/storage/avg_jnc_pressure.json', 'w') as outfile:
+            json.dump(data, outfile)
 
         with open(csvfile, 'a+') as outfile:
             outfile.write(str(now_time))
@@ -169,22 +208,26 @@ if __name__ == "__main__":
         traci.simulationStep()
         step += 1
 
-    # traci.gui.screenshot("View #0", "/var/www/html/enginx/sim3/storage/view.jpg")
+    traci.gui.screenshot("View #0", "/var/www/html/enginx/sim3/storage/view.jpg")
 
-    # data = {"state": 0}
-    # with open('/var/www/html/enginx/sim3/storage/run_state.json', 'w') as outfile:
-    #     json.dump(data, outfile)
+    data = {"state": 0}
+    with open('/var/www/html/enginx/sim3/storage/run_state.json', 'w') as outfile:
+        json.dump(data, outfile)
 
-    # data = {"value": 0.0}
-    # with open('/var/www/html/enginx/sim3/storage/avg_wait_time.json', 'w') as outfile:
-    #     json.dump(data, outfile)
-    # data = {"value": 0}
-    # with open('/var/www/html/enginx/sim3/storage/running_cars.json', 'w') as outfile:
-    #     json.dump(data, outfile)
+    data = {"value": 0.0}
+    with open('/var/www/html/enginx/sim3/storage/avg_wait_time.json', 'w') as outfile:
+        json.dump(data, outfile)
+    data = {"value": 0}
+    with open('/var/www/html/enginx/sim3/storage/running_cars.json', 'w') as outfile:
+        json.dump(data, outfile)
 
-    # data = {"value": 0}
-    # with open('/var/www/html/enginx/sim3/storage/now_time.json', 'w') as outfile:
-    #     json.dump(data, outfile)
+    data = {"value": 0}
+    with open('/var/www/html/enginx/sim3/storage/avg_jnc_pressure.json', 'w') as outfile:
+        json.dump(data, outfile)
+
+    data = {"value": 0}
+    with open('/var/www/html/enginx/sim3/storage/now_time.json', 'w') as outfile:
+        json.dump(data, outfile)
 
     traci.close()
     sys.stdout.flush()
