@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import math
+import time
 
 
 t_retval = []
@@ -149,7 +150,13 @@ class VehicleCounter(object):
                     self.vehicle_count += 1
                
         # RHS
-        cv2.putText(output_image, ("Density: %02d" % self.vehicle_RHS), (200, 20)
+        if (frame_time - start_time >= 40.0):
+            self.vehicle_RHS = 0
+            density = self.vehicle_RHS/ 100
+        else :
+            density = self.vehicle_RHS/ 100 + 0.2
+
+        cv2.putText(output_image, ("Density: %02f" % density), (175, 20)
                 , cv2.FONT_HERSHEY_PLAIN, 1.2, (127, 255, 255), 2)
 
         # Remove vehicles that have not been seen long enough
@@ -183,11 +190,12 @@ cap = cv2.VideoCapture('input/trafficfeed.mp4')
 frame_w = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
 frame_h = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
+start_time = time.time()
 ret, frame = cap.read()
 while ret:
     #read the frame
     ret, frame = cap.read()
-
+    frame_time = time.time()
     mask = np.zeros(frame.shape, dtype=np.uint8)
     roi_corners = np.array([[(150,10),(385,250),(30,250),(125,10)]], dtype=np.int32)
 
@@ -270,7 +278,6 @@ while ret:
         tracked_conts.append(c)
         
     if car_counter is None:
-        print("Creating vehicle counter...")
         car_counter = VehicleCounter(frame.shape[:2], frame.shape[0] / 3)
 
     #get latest count
