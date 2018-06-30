@@ -292,13 +292,13 @@ if __name__ == "__main__":
 
     #     tls[jnc] = desc
 
-        # print("\n-----------------------------\n")
+    #     print("\n-----------------------------\n")
 
     # with open(edgestore, 'w') as outfile:
     #     json.dump(tls, outfile)
 
     traci.close()
-    sys.stdout.flush()
+    # sys.stdout.flush()
 
     from shutil import copyfile
     copyfile(statefile, "data/algo/last.json")

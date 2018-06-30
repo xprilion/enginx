@@ -1,7 +1,7 @@
 # Welcome, to the world's coolest learner algorithm
 
 import json
-from random import randint
+import random
 from subprocess import call
 from shutil import copyfile
 
@@ -16,7 +16,7 @@ bestrun = sum(1 for line in open(toprun))
 
 iter_since_best = 0
 
-while iter_since_best <= 3:
+while iter_since_best <= 10:
 
 	iter_since_best += 1
 
@@ -94,11 +94,11 @@ while iter_since_best <= 3:
 
 		for t in range(len(tlsdata[pek[0]])):
 			if tlsdata[pek[0]][t][1][pev[0]] in ['g', 'G']:
-				tlsdata[pek[0]][t][0] += avgpr
+				tlsdata[pek[0]][t][0] += ((avgpr / 2) + random.random() * 3)
 			elif tlsdata[pek[0]][t][1][pev[0]] in ['r', 'R']:
-				tlsdata[pek[0]][t][0] -= avgpr / 2
+				tlsdata[pek[0]][t][0] -= ((avgpr / 2)  + random.random() * 2)
 			else:
-				tlsdata[pek[0]][t][0] -= avgpr / 3
+				tlsdata[pek[0]][t][0] -= ((avgpr / 3)  + random.random())
 
 			if tlsdata[pek[0]][t][0] < 3:
 				tlsdata[pek[0]][t][0] = 3
@@ -114,16 +114,20 @@ while iter_since_best <= 3:
 
 	lastrun = sum(1 for line in open(lastfile))
 
-	print("Last Run: %s || Best Run: %s " % (lastrun, bestrun))
-
 	if lastrun < bestrun:
 		iter_since_best = 0
 		bestrun = lastrun
 		copyfile(lastfile, toprun)
 		copyfile(tlsfile, toptls)
 
+	print("\n---------------------------------------------------------------------------\n")
+	print("Last Run: %s || Best Run: %s " % (lastrun, bestrun))
+	print("\n---------------------------------------------------------------------------\n")
+
+
 copyfile(toprun, lastfile)
 copyfile(toptls, tlsfile)
+
 
 
 '''
