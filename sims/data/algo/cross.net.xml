@@ -625,129 +625,129 @@
     <edge id="gneE51" from="gneJ32" to="gneJ26" priority="1">
         <lane id="gneE51_0" index="0" speed="13.89" length="189.57" shape="293.08,817.52 208.30,987.08"/>
     </edge>
-<tlLogic id="gneJ39" type="static" programID="0" offset="0">
-<phase duration="3" state="GgrrGG"/>
-<phase duration="3" state="ygrryy"/>
-<phase duration="3" state="rGrrrr"/>
-<phase duration="3" state="ryrrrr"/>
-<phase duration="3" state="rrGGGr"/>
-<phase duration="3" state="rryyyr"/>
-</tlLogic>
-<tlLogic id="gneJ36" type="static" programID="0" offset="0">
-<phase duration="3" state="GgrrGG"/>
-<phase duration="3" state="ygrryy"/>
-<phase duration="3" state="rGrrrr"/>
-<phase duration="3" state="ryrrrr"/>
-<phase duration="3" state="rrGGGr"/>
-<phase duration="3" state="rryyyr"/>
-</tlLogic>
-<tlLogic id="gneJ32" type="static" programID="0" offset="0">
-<phase duration="3" state="GGGgrr"/>
+<tlLogic id="gneJ34" type="static" programID="0" offset="0">
+<phase duration="40" state="GGGgrr"/>
 <phase duration="3" state="yyygrr"/>
 <phase duration="3" state="rrrGrr"/>
 <phase duration="3" state="rrryrr"/>
-<phase duration="3" state="GrrrGG"/>
+<phase duration="5.55" state="GrrrGG"/>
 <phase duration="3" state="yrrryy"/>
 </tlLogic>
-<tlLogic id="gneJ33" type="static" programID="0" offset="0">
-<phase duration="3" state="GgrrGG"/>
-<phase duration="3" state="ygrryy"/>
-<phase duration="3" state="rGrrrr"/>
-<phase duration="3" state="ryrrrr"/>
-<phase duration="3" state="rrGGGr"/>
-<phase duration="3" state="rryyyr"/>
-</tlLogic>
-<tlLogic id="gneJ29" type="static" programID="0" offset="0">
-<phase duration="3" state="GgrrGG"/>
-<phase duration="3" state="ygrryy"/>
-<phase duration="3" state="rGrrrr"/>
-<phase duration="3" state="ryrrrr"/>
-<phase duration="3" state="rrGGGr"/>
-<phase duration="3" state="rryyyr"/>
-</tlLogic>
-<tlLogic id="gneJ24" type="static" programID="0" offset="0">
-<phase duration="3" state="rrrGGgrrrGGg"/>
-<phase duration="3" state="rrryygrrryyg"/>
-<phase duration="3" state="rrrrrGrrrrrG"/>
-<phase duration="3" state="rrrrryrrrrry"/>
-<phase duration="3" state="GGgrrrGGgrrr"/>
-<phase duration="3" state="yygrrryygrrr"/>
-<phase duration="3" state="rrGrrrrrGrrr"/>
-<phase duration="3" state="rryrrrrryrrr"/>
-</tlLogic>
-<tlLogic id="gneJ31" type="static" programID="0" offset="0">
-<phase duration="3" state="rrGGGg"/>
-<phase duration="3" state="rryyyg"/>
-<phase duration="3" state="rrrrrG"/>
-<phase duration="3" state="rrrrry"/>
-<phase duration="3" state="GGGrrr"/>
-<phase duration="3" state="yyyrrr"/>
-</tlLogic>
-<tlLogic id="gneJ26" type="static" programID="0" offset="0">
-<phase duration="3" state="GGggrrrrrrrrGGGgrrrr"/>
-<phase duration="3" state="yyggrrrrrrrryyygrrrr"/>
-<phase duration="3" state="rrGGrrrrrrrrrrrGrrrr"/>
-<phase duration="3" state="rryyrrrrrrrrrrryrrrr"/>
-<phase duration="3" state="rrrrGGGGGgggrrrrrrrr"/>
-<phase duration="3" state="rrrryyyyygggrrrrrrrr"/>
-<phase duration="3" state="rrrrrrrrrGGGrrrrrrrr"/>
-<phase duration="3" state="rrrrrrrrryyyrrrrrrrr"/>
-<phase duration="3" state="GrrrrrrrrrrrrrrrGGGG"/>
-<phase duration="3" state="yrrrrrrrrrrrrrrryyyy"/>
-</tlLogic>
-<tlLogic id="gneJ27" type="static" programID="0" offset="0">
-<phase duration="3" state="GgrrGG"/>
-<phase duration="3" state="ygrryy"/>
-<phase duration="3" state="rGrrrr"/>
-<phase duration="3" state="ryrrrr"/>
-<phase duration="3" state="rrGGGr"/>
-<phase duration="3" state="rryyyr"/>
-</tlLogic>
-<tlLogic id="gneJ30" type="static" programID="0" offset="0">
-<phase duration="3" state="GgrrGG"/>
-<phase duration="3" state="ygrryy"/>
-<phase duration="3" state="rGrrrr"/>
+<tlLogic id="gneJ39" type="static" programID="0" offset="0">
+<phase duration="40" state="GgrrGG"/>
+<phase duration="33.68333333333334" state="ygrryy"/>
+<phase duration="30.75" state="rGrrrr"/>
 <phase duration="3" state="ryrrrr"/>
 <phase duration="3" state="rrGGGr"/>
 <phase duration="3" state="rryyyr"/>
 </tlLogic>
 <tlLogic id="gneJ25" type="static" programID="0" offset="0">
-<phase duration="3" state="GggrrrrrrGGG"/>
-<phase duration="3" state="yggrrrrrryyy"/>
-<phase duration="3" state="rGGrrrrrrrrr"/>
+<phase duration="40" state="GggrrrrrrGGG"/>
+<phase duration="24.8" state="yggrrrrrryyy"/>
+<phase duration="23.7" state="rGGrrrrrrrrr"/>
 <phase duration="3" state="ryyrrrrrrrrr"/>
 <phase duration="3" state="rrrGGGGggrrr"/>
 <phase duration="3" state="rrryyyyggrrr"/>
 <phase duration="3" state="rrrrrrrGGrrr"/>
 <phase duration="3" state="rrrrrrryyrrr"/>
 </tlLogic>
-<tlLogic id="gneJ23" type="static" programID="0" offset="0">
-<phase duration="3" state="rrrGGgrrrGGg"/>
+<tlLogic id="gneJ31" type="static" programID="0" offset="0">
+<phase duration="15.0" state="rrGGGg"/>
+<phase duration="3" state="rryyyg"/>
+<phase duration="3" state="rrrrrG"/>
+<phase duration="3" state="rrrrry"/>
+<phase duration="40" state="GGGrrr"/>
+<phase duration="3" state="yyyrrr"/>
+</tlLogic>
+<tlLogic id="gneJ24" type="static" programID="0" offset="0">
+<phase duration="9.25" state="rrrGGgrrrGGg"/>
 <phase duration="3" state="rrryygrrryyg"/>
 <phase duration="3" state="rrrrrGrrrrrG"/>
 <phase duration="3" state="rrrrryrrrrry"/>
-<phase duration="3" state="GGgrrrGGgrrr"/>
-<phase duration="3" state="yygrrryygrrr"/>
-<phase duration="3" state="rrGrrrrrGrrr"/>
+<phase duration="38.15" state="GGgrrrGGgrrr"/>
+<phase duration="3.4499999999999997" state="yygrrryygrrr"/>
+<phase duration="3.4499999999999997" state="rrGrrrrrGrrr"/>
 <phase duration="3" state="rryrrrrryrrr"/>
-</tlLogic>
-<tlLogic id="gneJ34" type="static" programID="0" offset="0">
-<phase duration="3" state="GGGgrr"/>
-<phase duration="3" state="yyygrr"/>
-<phase duration="3" state="rrrGrr"/>
-<phase duration="3" state="rrryrr"/>
-<phase duration="3" state="GrrrGG"/>
-<phase duration="3" state="yrrryy"/>
 </tlLogic>
 <tlLogic id="gneJ35" type="static" programID="0" offset="0">
 <phase duration="3" state="rrrrrrGGGGgg"/>
 <phase duration="3" state="rrrrrryyyygg"/>
 <phase duration="3" state="rrrrrrrrrrGG"/>
 <phase duration="3" state="rrrrrrrrrryy"/>
-<phase duration="3" state="GGGGggrrrrrr"/>
+<phase duration="40" state="GGGGggrrrrrr"/>
 <phase duration="3" state="yyyyggrrrrrr"/>
 <phase duration="3" state="rrrrGGrrrrrr"/>
 <phase duration="3" state="rrrryyrrrrrr"/>
+</tlLogic>
+<tlLogic id="gneJ27" type="static" programID="0" offset="0">
+<phase duration="40" state="GgrrGG"/>
+<phase duration="22.483333333333334" state="ygrryy"/>
+<phase duration="20.400000000000002" state="rGrrrr"/>
+<phase duration="3" state="ryrrrr"/>
+<phase duration="3" state="rrGGGr"/>
+<phase duration="3" state="rryyyr"/>
+</tlLogic>
+<tlLogic id="gneJ30" type="static" programID="0" offset="0">
+<phase duration="14.950000000000006" state="GgrrGG"/>
+<phase duration="3.4" state="ygrryy"/>
+<phase duration="3.4" state="rGrrrr"/>
+<phase duration="3" state="ryrrrr"/>
+<phase duration="32.85" state="rrGGGr"/>
+<phase duration="3" state="rryyyr"/>
+</tlLogic>
+<tlLogic id="gneJ36" type="static" programID="0" offset="0">
+<phase duration="40" state="GgrrGG"/>
+<phase duration="27.216666666666665" state="ygrryy"/>
+<phase duration="25.7" state="rGrrrr"/>
+<phase duration="3" state="ryrrrr"/>
+<phase duration="3" state="rrGGGr"/>
+<phase duration="3" state="rryyyr"/>
+</tlLogic>
+<tlLogic id="gneJ33" type="static" programID="0" offset="0">
+<phase duration="18.6" state="GgrrGG"/>
+<phase duration="10.8" state="ygrryy"/>
+<phase duration="10.8" state="rGrrrr"/>
+<phase duration="3" state="ryrrrr"/>
+<phase duration="23.6" state="rrGGGr"/>
+<phase duration="3" state="rryyyr"/>
+</tlLogic>
+<tlLogic id="gneJ23" type="static" programID="0" offset="0">
+<phase duration="3" state="rrrGGgrrrGGg"/>
+<phase duration="3" state="rrryygrrryyg"/>
+<phase duration="3" state="rrrrrGrrrrrG"/>
+<phase duration="3" state="rrrrryrrrrry"/>
+<phase duration="40" state="GGgrrrGGgrrr"/>
+<phase duration="19.733333333333334" state="yygrrryygrrr"/>
+<phase duration="18.6" state="rrGrrrrrGrrr"/>
+<phase duration="3" state="rryrrrrryrrr"/>
+</tlLogic>
+<tlLogic id="gneJ29" type="static" programID="0" offset="0">
+<phase duration="40" state="GgrrGG"/>
+<phase duration="15.833333333333332" state="ygrryy"/>
+<phase duration="10.099999999999998" state="rGrrrr"/>
+<phase duration="3" state="ryrrrr"/>
+<phase duration="4.149999999999999" state="rrGGGr"/>
+<phase duration="3" state="rryyyr"/>
+</tlLogic>
+<tlLogic id="gneJ26" type="static" programID="0" offset="0">
+<phase duration="40" state="GGggrrrrrrrrGGGgrrrr"/>
+<phase duration="37.766666666666666" state="yyggrrrrrrrryyygrrrr"/>
+<phase duration="36.65" state="rrGGrrrrrrrrrrrGrrrr"/>
+<phase duration="3" state="rryyrrrrrrrrrrryrrrr"/>
+<phase duration="3" state="rrrrGGGGGgggrrrrrrrr"/>
+<phase duration="3" state="rrrryyyyygggrrrrrrrr"/>
+<phase duration="3" state="rrrrrrrrrGGGrrrrrrrr"/>
+<phase duration="3" state="rrrrrrrrryyyrrrrrrrr"/>
+<phase duration="11.3" state="GrrrrrrrrrrrrrrrGGGG"/>
+<phase duration="3" state="yrrrrrrrrrrrrrrryyyy"/>
+</tlLogic>
+<tlLogic id="gneJ32" type="static" programID="0" offset="0">
+<phase duration="40" state="GGGgrr"/>
+<phase duration="3" state="yyygrr"/>
+<phase duration="3" state="rrrGrr"/>
+<phase duration="3" state="rrryrr"/>
+<phase duration="3" state="GrrrGG"/>
+<phase duration="3" state="yrrryy"/>
 </tlLogic>
 <junction id="gneJ23" type="traffic_light" x="-100.00" y="1000.00" incLanes="gneE33_0 -gneE27_0 -gneE34_0 gneE49_0" intLanes=":gneJ23_0_0 :gneJ23_1_0 :gneJ23_12_0 :gneJ23_3_0 :gneJ23_4_0 :gneJ23_13_0 :gneJ23_6_0 :gneJ23_7_0 :gneJ23_14_0 :gneJ23_9_0 :gneJ23_10_0 :gneJ23_15_0" shape="-103.25,1004.75 -96.75,1004.75 -95.20,1003.25 -95.20,996.75 -96.68,995.25 -103.25,995.25 -104.75,996.75 -104.75,1003.25">
         <request index="0" response="000000010000" foes="000100010000" cont="0"/>

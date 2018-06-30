@@ -37,8 +37,8 @@ if __name__ == "__main__":
     if options.nogui:
         sumoBinary = checkBinary('sumo')
     else:
-        sumoBinary = checkBinary('sumo-gui')
-        # sumoBinary = checkBinary('sumo')
+        # sumoBinary = checkBinary('sumo-gui')
+        sumoBinary = checkBinary('sumo')
 
 
     # <tlLogic id="gneJ23" type="static" programID="0" offset="0">
@@ -140,9 +140,9 @@ if __name__ == "__main__":
         traci.route.add("trip"+str(i), cartrip)
         traci.vehicle.add("v"+str(i), "trip"+str(i), typeID="reroutingType",  depart= i+random.randint(0, 5*(i+1)))
 
-    data = {"state": 1}
-    with open('/var/www/html/enginx/sim3/storage/run_state.json', 'w') as outfile:
-        json.dump(data, outfile)
+    # data = {"state": 1}
+    # with open('/var/www/html/enginx/sim3/storage/run_state.json', 'w') as outfile:
+    #     json.dump(data, outfile)
 
 
     startTime = int(time.time())
@@ -160,8 +160,8 @@ if __name__ == "__main__":
 
     while traci.simulation.getMinExpectedNumber() > 0:
 
-        if step % 3 == 0:
-            traci.gui.screenshot("View #0", "/var/www/html/enginx/sim3/storage/view.jpg")
+        # if step % 3 == 0:
+        #     traci.gui.screenshot("View #0", "/var/www/html/enginx/sim3/storage/view.jpg")
 
         # total_wait_time
 
@@ -194,7 +194,7 @@ if __name__ == "__main__":
             pjuns = {}
 
             for i in range(len(ins)):
-                pjuns[ins[i]] = pressures[i]
+                pjuns[ins[i]] = pressures[i] * 100
 
             junction_pressure[jnc] = [desc, pjuns]
 
@@ -224,21 +224,21 @@ if __name__ == "__main__":
 
         now_time = traci.simulation.getCurrentTime() / 1000
 
-        data = {"value": round(avg_wait_time, 2)}
-        with open('/var/www/html/enginx/sim3/storage/avg_wait_time.json', 'w') as outfile:
-            json.dump(data, outfile)
+        # data = {"value": round(avg_wait_time, 2)}
+        # with open('/var/www/html/enginx/sim3/storage/avg_wait_time.json', 'w') as outfile:
+        #     json.dump(data, outfile)
 
-        data = {"value": len(running_cars)}
-        with open('/var/www/html/enginx/sim3/storage/running_cars.json', 'w') as outfile:
-            json.dump(data, outfile)
+        # data = {"value": len(running_cars)}
+        # with open('/var/www/html/enginx/sim3/storage/running_cars.json', 'w') as outfile:
+        #     json.dump(data, outfile)
 
-        data = {"value": now_time}
-        with open('/var/www/html/enginx/sim3/storage/now_time.json', 'w') as outfile:
-            json.dump(data, outfile)
+        # data = {"value": now_time}
+        # with open('/var/www/html/enginx/sim3/storage/now_time.json', 'w') as outfile:
+        #     json.dump(data, outfile)
 
-        data = {"value": round(avg_jnc_pressure, 3)}
-        with open('/var/www/html/enginx/sim3/storage/avg_jnc_pressure.json', 'w') as outfile:
-            json.dump(data, outfile)
+        # data = {"value": round(avg_jnc_pressure, 3)}
+        # with open('/var/www/html/enginx/sim3/storage/avg_jnc_pressure.json', 'w') as outfile:
+        #     json.dump(data, outfile)
 
 
         data = {"now_time": now_time, "pressures": junction_pressure}
@@ -249,49 +249,53 @@ if __name__ == "__main__":
         traci.simulationStep()
         step += 1
 
-    traci.gui.screenshot("View #0", "/var/www/html/enginx/sim3/storage/view.jpg")
+    # traci.gui.screenshot("View #0", "/var/www/html/enginx/sim3/storage/view.jpg")
 
-    data = {"state": 0}
-    with open('/var/www/html/enginx/sim3/storage/run_state.json', 'w') as outfile:
-        json.dump(data, outfile)
+    # data = {"state": 0}
+    # with open('/var/www/html/enginx/sim3/storage/run_state.json', 'w') as outfile:
+    #     json.dump(data, outfile)
 
-    data = {"value": 0.0}
-    with open('/var/www/html/enginx/sim3/storage/avg_wait_time.json', 'w') as outfile:
-        json.dump(data, outfile)
-    data = {"value": 0}
-    with open('/var/www/html/enginx/sim3/storage/running_cars.json', 'w') as outfile:
-        json.dump(data, outfile)
+    # data = {"value": 0.0}
+    # with open('/var/www/html/enginx/sim3/storage/avg_wait_time.json', 'w') as outfile:
+    #     json.dump(data, outfile)
+    # data = {"value": 0}
+    # with open('/var/www/html/enginx/sim3/storage/running_cars.json', 'w') as outfile:
+    #     json.dump(data, outfile)
 
-    data = {"value": 0}
-    with open('/var/www/html/enginx/sim3/storage/now_time.json', 'w') as outfile:
-        json.dump(data, outfile)
+    # data = {"value": 0}
+    # with open('/var/www/html/enginx/sim3/storage/now_time.json', 'w') as outfile:
+    #     json.dump(data, outfile)
 
-    data = {"value": 0}
-    with open('/var/www/html/enginx/sim3/storage/avg_jnc_pressure.json', 'w') as outfile:
-        json.dump(data, outfile)
+    # data = {"value": 0}
+    # with open('/var/www/html/enginx/sim3/storage/avg_jnc_pressure.json', 'w') as outfile:
+    #     json.dump(data, outfile)
 
 
-    tls = {}
+    # tls = {}
 
-    for jnc in juncs.keys():
-        desc = []
+    # for jnc in juncs.keys():
+    #     desc = []
 
-        tdef = traci.trafficlight.getCompleteRedYellowGreenDefinition(jnc)[0]
+    #     tdef = traci.trafficlight.getCompleteRedYellowGreenDefinition(jnc)[0]
 
-        for ph in tdef._phases:
-            # print(type(ph), ph._duration // 1000, ph._phaseDef)
-            # desc.append([ph._duration // 1000, ph._phaseDef])
-            # desc.append([random.randint(3, 20), ph._phaseDef])
-            desc.append([3, ph._phaseDef])
+    #     # print(jnc)
+    #     # print(traci.trafficlight.getControlledLinks(jnc))
+    #     # print(tdef)
 
-        # print(jnc, ": ", desc)
+    #     for ph in tdef._phases:
+    #         # print(type(ph), ph._duration // 1000, ph._phaseDef)
+    #         # desc.append([ph._duration // 1000, ph._phaseDef])
+    #         # desc.append([random.randint(3, 20), ph._phaseDef])
+    #         desc.append([3, ph._phaseDef])
 
-        tls[jnc] = desc
+    #     # print(jnc, ": ", desc)
+
+    #     tls[jnc] = desc
 
         # print("\n-----------------------------\n")
 
-    with open(edgestore, 'w') as outfile:
-        json.dump(tls, outfile)
+    # with open(edgestore, 'w') as outfile:
+    #     json.dump(tls, outfile)
 
     traci.close()
     sys.stdout.flush()
