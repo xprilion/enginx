@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import math
 import time
-
+import json
 
 t_retval = []
 tracked_conts = []
@@ -142,22 +142,44 @@ class VehicleCounter(object):
         # Count any uncounted vehicles that are past the divider
         for vehicle in self.vehicles:
             if (not vehicle.counted and (((vehicle.last_position[1] > self.divider) and (vehicle.vehicle_dir == 1)) and (vehicle.frames_seen > 6))):
-
                 vehicle.counted = True
                 # update appropriate counter
                 if ((vehicle.last_position[1] > self.divider) and (vehicle.vehicle_dir == 1) and (vehicle.last_position[0] >= (int(frame_w/2)-10))):
                     self.vehicle_RHS += 1
                     self.vehicle_count += 1
-               
+
+        data = {"value": self.vehicle_RHS}
+        try:
+            with open("C:/xampp/htdocs/enginx/sim3/storage2/vehicle_count.json", "w") as f:
+                json.dump(data, f)
+        except:
+            pass
+
+                
         # RHS
+        state = {}
         if (frame_time - start_time >= 40.0):
             self.vehicle_RHS = 0
-            density = self.vehicle_RHS/ 100
+            density = self.vehicle_RHS
+            state = {"state": "Dynamic"}
         else :
-            density = self.vehicle_RHS/ 100 + 0.2
+            state = {"state": "Static"}
+            density = round((self.vehicle_RHS*6.3739)/100, 3)
 
-        cv2.putText(output_image, ("Density: %02f" % density), (175, 20)
-                , cv2.FONT_HERSHEY_PLAIN, 1.2, (127, 255, 255), 2)
+        data1 = {"value": density}
+        try:
+            with open("C:/xampp/htdocs/enginx/sim3/storage2/density.json", "w") as f:
+                json.dump(data1, f)
+        except:
+            pass
+        try:
+            with open("C:/xampp/htdocs/enginx/sim3/storage2/tls_state.json", "w") as f:
+                json.dump(state, f)
+        except:
+            pass
+
+        # cv2.putText(output_image, ("Density: %02f" % density), (175, 20)
+        #        , cv2.FONT_HERSHEY_PLAIN, 1.2, (127, 255, 255), 2)
 
         # Remove vehicles that have not been seen long enough
         removed = [ v.id for v in self.vehicles
@@ -192,10 +214,15 @@ frame_h = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
 start_time = time.time()
 ret, frame = cap.read()
+
+step=0
 while ret:
+    step += 1
     #read the frame
     ret, frame = cap.read()
+
     frame_time = time.time()
+    
     mask = np.zeros(frame.shape, dtype=np.uint8)
     roi_corners = np.array([[(150,10),(385,250),(30,250),(125,10)]], dtype=np.int32)
 
@@ -292,6 +319,9 @@ while ret:
 
     #show the processed frame
     cv2.imshow("preview", frame)
+
+    # if step % 10 == 0:
+    #     cv2.imwrite("C:/xampp/htdocs/enginx/sim3/storage2/frame.jpg", frame)
     
     k = cv2.waitKey(5) & 0xFF
     if k==27:
